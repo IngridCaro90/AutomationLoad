@@ -26,6 +26,8 @@ jobs:
           java-version: '17'
           command-install: './mvnw install'
 
+      - name: Maven Install
+        run: mvn clean install
       - name: Built with maven
         run: mvn gatling:test -D"gatling.simulationClass=apis.GetProducts"
       
