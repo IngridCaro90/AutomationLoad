@@ -25,6 +25,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: maven
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
       - name: Built with maven
         run: mvn gatling:test -D"gatling.simulationClass=apis.GetProducts"
       
