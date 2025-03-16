@@ -4,7 +4,7 @@ name: automated-testing-load
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main","staging" ]
+    branches: [ "main","staging", "feature/**"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -44,3 +44,20 @@ jobs:
           name: load-test-report
           path: target/gatling/
           
+      - name: Merge any -> staging
+        if: startsWith(github.ref, 'refs/heads/feature/')  # Check if the branch is a feature branch
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: staging
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete merged feature branch
+        if: startsWith(github.ref, 'refs/heads/feature/')  # Check if the branch is a feature branch
+        run: |
+          git push origin --delete ${{ github.ref }}
+        
+      # Optional: Clean up tags if required
+      - name: Clean up local tags
+        run: |
+          git fetch --tags
