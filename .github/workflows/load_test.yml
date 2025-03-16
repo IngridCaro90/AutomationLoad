@@ -39,7 +39,9 @@ jobs:
         run: mvn gatling:test -D"gatling.simulationClass=apis.DeleteProducts"
 
       - name: Generate Gatling reports
+        uses: actions/upload-artifact@v3
+        id: artifact-upload
         with:
-          name: gatling-reports
-          files-to-export: target/gatling/
+          name: download-file
+          path: target/gatling/
       
