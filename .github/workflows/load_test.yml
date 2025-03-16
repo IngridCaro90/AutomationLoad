@@ -35,12 +35,11 @@ jobs:
       - name: Execution test Put
         run: mvn gatling:test -D"gatling.simulationClass=apis.PutUpdateProduct"
 
-      - name: Upload Gatling reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: gatling-reports
-          path: target/gatling/
-
       - name: Execution test Delete
         run: mvn gatling:test -D"gatling.simulationClass=apis.DeleteProducts"
+
+      - name: Generate Gatling reports
+        with:
+          name: gatling-reports
+          files-to-export: target/gatling/
       
