@@ -24,7 +24,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: maven
       - name: Built with maven
         run: mvn gatling:test -D"gatling.simulationClass=apis.GetProducts"
       
