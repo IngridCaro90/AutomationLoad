@@ -26,6 +26,15 @@ jobs:
       - name: Clean install with maven
         run: mvn clean install
 
-      - name: Built with maven
+      - name: Execution test Get
         run: mvn gatling:test -D"gatling.simulationClass=apis.GetProducts"
+
+      - name: Execution test Post
+        run: mvn gatling:test -D"gatling.simulationClass=apis.PostAddProduct"
+        
+      - name: Execution test Put
+        run: mvn gatling:test -D"gatling.simulationClass=apis.PutUpdateProduct"
+
+      - name: Execution test Delete
+        run: mvn gatling:test -D"gatling.simulationClass=apis.DeleteProducts"
       
