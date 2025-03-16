@@ -24,7 +24,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          command-install: './mvnw install'
 
       - name: Maven Install
         run: mvn clean install
