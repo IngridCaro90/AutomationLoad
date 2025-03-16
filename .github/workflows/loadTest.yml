@@ -24,11 +24,8 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Setup Maven
-        uses: actions/setup-maven@v2
-        with:
-          maven-version: '3.9.9'
-          cache-maven-dependencies: true
+      - name: Clean install with maven
+        run: ./mvnw clean install
 
       - name: Built with maven
         run: mvn gatling:test -D"gatling.simulationClass=apis.GetProducts"
